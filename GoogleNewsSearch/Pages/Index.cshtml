@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<head>
+    <link href="~/css/all.css" rel="stylesheet">
+</head>
+
+<h1 class="display-6">Google News</h1>
+<p class="mb-4">Type a keyword to search in the latest news.</p>
+
+<form method="get">
+
+    <div class="d-flex ">
+        <input type="text" class="w-100 h-50 " name="search" value="@ViewBag.Search" />
+        <button type="submit" class=" d-flex bg-secondary text-white h-50 ms-2 px-3">Search <i class="fa-solid fa-magnifying-glass ms-2 fs-6 my-auto"></i></button>
+    </div>
+    <div>
+        @if (!string.IsNullOrEmpty(ViewBag.Search))
+        {
+            <ul class="mt-5 list-group list-group-flush">
+                @foreach (var news in this.ViewBag.List)
+                {
+                    <li class="mb-5">
+                        <h4>@news.Title</h4>
+                        <p class="mb-1">@news.Description</p>
+                        <a class="text-secondary" href="@news.Link">@news.Date</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</form>
+
